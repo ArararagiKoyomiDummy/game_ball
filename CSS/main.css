@@ -1,0 +1,36 @@
+body{
+	margin: 0 0 0 0;
+	background-color:black;
+
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+
+html{
+	font-size: 100%;
+	color: white;
+}
+
+#main_screen{
+	position: absolute;
+	height: 100%;
+}
+
+#main_title{
+	position: absolute;
+}
+
+#main_content{
+	position: absolute;
+}
+
+.div_cell{
+	position: absolute;
+	background-color: rgba(100,150,150,0.5);
+}
+
+.div_ball{
+	position: absolute;
+}
