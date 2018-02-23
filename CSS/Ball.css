@@ -1,0 +1,60 @@
+.flashIn{
+	animation: flashIn 0.5s;
+	-moz-animation: flashIn 0.5s;	/* Firefox */
+	-webkit-animation: flashIn 0.5s;	/* Safari 和 Chrome */
+	-o-animation: flashIn 0.5s;	/* Opera */
+}
+
+@keyframes flashIn
+{
+	0% 		{left :    0; top :    0; width :    0; height :    0;}
+	50%		{left : -55%; top : -55%; width : 110%; height : 110%;}
+	100%	{left : -50%; top : -50%; width : 100%; height : 100%;}
+}
+@-moz-keyframes flashIn /* Firefox */
+{
+	0% 		{left :    0; top :    0; width :    0; height :    0;}
+	50%		{left : -55%; top : -55%; width : 110%; height : 110%;}
+	100%	{left : -50%; top : -50%; width : 100%; height : 100%;}
+}
+@-webkit-keyframes flashIn /* Safari 和 Chrome */
+{
+	0% 		{left :    0; top :    0; width :    0; height :    0;}
+	50%		{left : -55%; top : -55%; width : 110%; height : 110%;}
+	100%	{left : -50%; top : -50%; width : 100%; height : 100%;}
+}
+@-o-keyframes flashIn /* Opera */
+{
+	0% 		{left :    0; top :    0; width :    0; height :    0;}
+	50%		{left : -55%; top : -55%; width : 110%; height : 110%;}
+	100%	{left : -50%; top : -50%; width : 100%; height : 100%;}
+}
+
+
+.flashOut{
+	animation: flashOut 0.5s;
+	-moz-animation: flashOut 0.5s;	/* Firefox */
+	-webkit-animation: flashOut 0.5s;	/* Safari 和 Chrome */
+	-o-animation: flashOut 0.5s;	/* Opera */
+}
+
+@keyframes flashOut
+{
+	  0%	{left : -50%; top : -50%; width : 100%; height : 100%;}
+	1000% 	{left :    0; top :    0; width :    0; height :    0;}
+}
+@-moz-keyframes flashOut /* Firefox */
+{
+	  0%	{left : -50%; top : -50%; width : 100%; height : 100%;}
+	1000% 	{left :    0; top :    0; width :    0; height :    0;}
+}
+@-webkit-keyframes flashOut /* Safari 和 Chrome */
+{
+	  0%	{left : -50%; top : -50%; width : 100%; height : 100%;}
+	1000% 	{left :    0; top :    0; width :    0; height :    0;}
+}
+@-o-keyframes flashOut /* Opera */
+{
+	  0%	{left : -50%; top : -50%; width : 100%; height : 100%;}
+	1000% 	{left :    0; top :    0; width :    0; height :    0;}
+}

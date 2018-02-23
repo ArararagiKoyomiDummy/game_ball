@@ -2,13 +2,16 @@ function GameController(){
 	this.pBaseNode = null;
 	this.pMainTitle = null;
 	this.pMainContent = null;
+	this.pNextBalls = null;
+
 
 	//global config
 	this.ballTypeCount = __BallInfo.getAllTypeCount();
 	this.cellCountX = 9;
 	this.cellCountY = 9;
 	this.round = 0;
-
+	this.nextBallCount = 3;
+	
 	//cells
 	this.cells = new Array();
 	this.unusedCells = new Array();
@@ -70,17 +73,52 @@ function GameController(){
 		//init unusedCells
 		self.initUnusedCells();
 
-		//new 3Balls
-		for (var i = 0; i < 3; ++i) {
-			self.newBall();
+		//NextBalls
+		var _pNextBalls = new NextBalls(self, self.pMainTitle);
+		self.pNextBalls = _pNextBalls;
+
+
+
+		//new 3Balls todo delete
+		self.newBalls();
+
+		//test
+		for (var i = 0; i < 27; i++) {
+			setTimeout(function(){
+				self.fillBalls();
+			},
+			1000 * (i + 1)
+			)
 		}
+		
 	}
 
-	this.newBall = function(){
+	this.fillBalls = function(){
+		var _ballList = self.pNextBalls.getBallList();
+		for (var index in _ballList) {
+			//check can use
+			if (_ballList[index].hasBall == false) {
+				alert(_ballList);
+				alert('Error! No ball in the basket!').
+				return false;
+			}
+			//flashOut 等待区的球
+			self.pNextBalls.useBall(index);
+
+			//新建一个同type的球放置到游戏区
+			self.newBall(_ballList[i].type);
+		}
+
+		self.pNextBalls.fillingBalls();
+	}
+
+	this.newBall = function(type){
 		var _unusedCount = self.unusedCells.length;
 		if (_unusedCount <= 0) {
 			//没有空格子，则游戏失败
 			alert('游戏结束');
+			//todo 进入游戏结束结算流程
+			return;
 		}
 		var _randResult = random(_unusedCount -1);
 		var _unusedCellXY = self.unusedCells.splice(_randResult,1);
@@ -91,11 +129,10 @@ function GameController(){
 			alert(self.cells);
 			return;
 		}
-		var _type = random(self.ballTypeCount - 1);
-		_pCell.newBall(_type);
-
-
+		//var _type = random(self.ballTypeCount - 1);
+		_pCell.newBall(type);
 	}
+
 	this.initUnusedCells = function(){
 		self.unusedCells = new Array();
 		for (var x in self.cells){

@@ -22,8 +22,22 @@ function Ball(pController, pMainContent, pCell, type){
 			"width"	:_width,
 			"height":_width
 		})
+		//Img Frame
+		var _nodeBallImg = $('<div class="div_ball_img"></div>');
+		_nodeBallImg.css({
+			"width"	:'100%',
+			"height":'100%',
+			"top"	:"-50%",
+			"left"	:"-50%",
+			"margin-top"	: "50%",
+			"margin-left"	: "50%",
+		})
+		//img
 		var _nodeImg = $('<img with="100%" height="100%" src="'+ _src +'" />');
-		_nodeBall.append(_nodeImg);
+
+		//append
+		_nodeBall.append(_nodeBallImg);
+		_nodeBallImg.append(_nodeImg);
 
 		self.pNode = _nodeBall;
 		self.pMainContent.pNode.append(_nodeBall);
