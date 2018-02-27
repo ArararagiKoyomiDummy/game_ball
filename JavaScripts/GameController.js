@@ -80,36 +80,59 @@ function GameController(){
 
 
 		//new 3Balls todo delete
-		self.newBalls();
-
-		//test
-		for (var i = 0; i < 27; i++) {
-			setTimeout(function(){
+		setTimeout(
+			function(){
 				self.fillBalls();
 			},
-			1000 * (i + 1)
-			)
-		}
+			1500
+		)
+		
+
+		//test
+		// for (var i = 0; i < 27; i++) {
+		// 	setTimeout(function(){
+		// 		self.fillBalls();
+		// 	},
+		// 	3000 * (i + 1)
+		// 	)
+		// }
 		
 	}
 
 	this.fillBalls = function(){
+		var _waitingTime = 500;
+
 		var _ballList = self.pNextBalls.getBallList();
 		for (var index in _ballList) {
-			//check can use
-			if (_ballList[index].hasBall == false) {
-				alert(_ballList);
-				alert('Error! No ball in the basket!').
-				return false;
-			}
-			//flashOut 等待区的球
-			self.pNextBalls.useBall(index);
+			setTimeout(function(index){
+				console.log(index);
+				//check can use
+				if (_ballList[index].hasBall == false) {
+					alert(_ballList);
+					alert('Error! No ball in the basket!');
+					return false;
+				}
+				//flashOut 等待区的球
+				self.pNextBalls.useBall(index);
 
-			//新建一个同type的球放置到游戏区
-			self.newBall(_ballList[i].type);
+				//新建一个同type的球放置到游戏区
+				self.newBall(_ballList[index].type);
+			} (index),
+			function(index){
+				var _time = _waitingTime * index;
+				alert(_time);
+				return _time;
+			} (index)
+			)	
 		}
 
-		self.pNextBalls.fillingBalls();
+
+		setTimeout(function(){
+				self.pNextBalls.fillAllBalls();
+			},
+			(_waitingTime * 3)
+		)
+		
 	}
 
 	this.newBall = function(type){

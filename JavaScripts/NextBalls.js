@@ -31,7 +31,7 @@ function NextBalls(pController, pMainTitle){
 			});
 
 			self.pBallList[i] = {
-				"node"		：_nodeFrame,
+				"node"		: _nodeFrame,
 				"type"		: null,
 				"hasBall"	: false
 			}
@@ -49,12 +49,14 @@ function NextBalls(pController, pMainTitle){
 			return;
 		}
 
-		var _node = self.pBallList[index].node;
+		
+
+		var _node = self.pBallList[index].node.children();
 		if (_node.hasClass('flashOut')) {
 			//保险起见，先删除一次
 			_node.removeClass('flashOut');
 		}
-		_node.removeClass('flashOut');
+		_node.addClass('flashOut');
 
 		//set false
 		self.pBallList[index].hasBall = false;
@@ -72,13 +74,13 @@ function NextBalls(pController, pMainTitle){
 
 			//开始生成新的ballType
 			var _type = random(self.pController.ballTypeCount - 1);
-			self.pBallsType[i].type = _type;
+			self.pBallList[i].type = _type;
 
 			//添加node
 			var _ballInfo = __BallInfo.getInfo(_type);
 			var _src = "Source/Img/" + _ballInfo.sourceName + ".png";
 
-			var _width	= self.pNodes[i].css('width');
+			var _width	= self.pBallList[i].node.css('width');
 			var _nodeBall = $('<div class="div_ball"></div>');
 			_nodeBall.css({
 				"width"	:'100%',
@@ -90,6 +92,10 @@ function NextBalls(pController, pMainTitle){
 			})
 			var _nodeImg = $('<img with="100%" height="100%" src="'+ _src +'" />');
 			_nodeBall.append(_nodeImg);
+
+
+			//add
+			self.pBallList[i].node.append(_nodeBall);
 
 			if (_nodeBall.hasClass('flashIn')) {
 				//保险起见，先删除一次
