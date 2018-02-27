@@ -42,24 +42,54 @@ function NextBalls(pController, pMainTitle){
 		self.fillAllBalls();
 	}
 
-	this.useBall = function(index){
-		if (self.pBallList[index] == null) {
-			alert(self.pBallList);
-			alert('Error!');
-			return;
+	this.useBall = function(params){
+		var _index = params.index;
+		var _callback = params.callback || new Object();
+		var _waitTime = params.waitTime || 0;
+
+		alert('useBall'+ _index);
+		//showTime();
+
+		setTimeout(function(){
+			execute();
+		},_waitTime);
+
+
+		var execute = function(){
+			if (self.pBallList[_index] == null) {
+				alert(self.pBallList);
+				alert('Error!');
+				return;
+			}
+			var _node = self.pBallList[_index].node.children();
+			if (_node.hasClass('flashOut')) {
+				//保险起见，先删除一次
+				_node.removeClass('flashOut');
+			}
+			_node.addClass('flashOut');
+
+			setTimeout(
+				function(){
+					_node.remove();
+				},
+				500
+			)
+
+			//set false
+			self.pBallList[_index].hasBall = false;
+
+			//callback
+			if (typeof _callback.pFun == "function") {
+				var _backWaitTime = _callback.waitTime || 0;
+				var _params = _callback.params || null;
+				setTimeout(
+					function(){
+						_callback.pFun(_params);
+					},
+					_backWaitTime
+				)
+			}
 		}
-
-		
-
-		var _node = self.pBallList[index].node.children();
-		if (_node.hasClass('flashOut')) {
-			//保险起见，先删除一次
-			_node.removeClass('flashOut');
-		}
-		_node.addClass('flashOut');
-
-		//set false
-		self.pBallList[index].hasBall = false;
 	}
 
 	this.fillAllBalls = function(){

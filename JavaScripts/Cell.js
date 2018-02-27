@@ -37,11 +37,11 @@ function Cell(pController, pMainContent, x, y){
 			return false;
 		}
 		var _pBall = new Ball(
-				self.pController,
-				self.pMainContent,
-				self,
-				type
-			);
+			self.pController,
+			self.pMainContent,
+			self,
+			type
+		);
 		self.pBall = _pBall;
 	}
 

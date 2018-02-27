@@ -41,6 +41,12 @@ function Ball(pController, pMainContent, pCell, type){
 
 		self.pNode = _nodeBall;
 		self.pMainContent.pNode.append(_nodeBall);
+
+		if (_nodeBallImg.hasClass('flashIn')) {
+			//保险起见，先删除一次
+			_nodeBallImg.removeClass('flashIn');
+		}
+		_nodeBallImg.addClass("flashIn");
 	}
 
 	self.init();

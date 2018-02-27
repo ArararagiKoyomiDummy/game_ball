@@ -89,53 +89,55 @@ function GameController(){
 		
 
 		//test
-		// for (var i = 0; i < 27; i++) {
-		// 	setTimeout(function(){
-		// 		self.fillBalls();
-		// 	},
-		// 	3000 * (i + 1)
-		// 	)
-		// }
+		for (var i = 0; i < 27; i++) {
+			setTimeout(function(){
+				self.fillBalls();
+			},
+			3000 * (i + 1)
+			)
+		}
 		
 	}
 
 	this.fillBalls = function(){
+		//showTime();
+
 		var _waitingTime = 500;
 
 		var _ballList = self.pNextBalls.getBallList();
 		for (var index in _ballList) {
-			setTimeout(function(index){
-				console.log(index);
-				//check can use
-				if (_ballList[index].hasBall == false) {
-					alert(_ballList);
-					alert('Error! No ball in the basket!');
-					return false;
+			console.log(index);
+
+			//check
+			if (_ballList[index].hasBall == false) {
+				alert(_ballList);
+				alert('Error! No ball in the basket!');
+				return false;
+			}
+
+			//flashOut 等待区的球
+			var _time = 0;
+			//var _time = _waitingTime * index;
+			self.pNextBalls.useBall({
+				'index'		: index,
+				'waitTime'	: index *_waitingTime,
+				'callback'	: {
+					'pFun'		: self.newBall,
+					'params'	: {'type' : _ballList[index].type},
+					'waitTime'	: _time
 				}
-				//flashOut 等待区的球
-				self.pNextBalls.useBall(index);
-
-				//新建一个同type的球放置到游戏区
-				self.newBall(_ballList[index].type);
-			} (index),
-			function(index){
-				var _time = _waitingTime * index;
-				alert(_time);
-				return _time;
-			} (index)
-			)	
+			});
 		}
-
-
-		setTimeout(function(){
-				self.pNextBalls.fillAllBalls();
-			},
-			(_waitingTime * 3)
+		setTimeout(
+			function(){ self.pNextBalls.fillAllBalls(); },
+			_waitingTime * 3
 		)
 		
 	}
 
-	this.newBall = function(type){
+	this.newBall = function(params){
+		var _type = params.type;
+
 		var _unusedCount = self.unusedCells.length;
 		if (_unusedCount <= 0) {
 			//没有空格子，则游戏失败
@@ -153,7 +155,9 @@ function GameController(){
 			return;
 		}
 		//var _type = random(self.ballTypeCount - 1);
-		_pCell.newBall(type);
+		_pCell.newBall(_type);
+
+
 	}
 
 	this.initUnusedCells = function(){
